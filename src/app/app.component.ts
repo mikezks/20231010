@@ -10,5 +10,9 @@ import { SidebarComponent } from './sidebar/sidebar.component';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  title = 'Hello World!';
+  protected title = 'Hello Angular!';
+
+  changeTitle(): void {
+    this.title = this.title === 'Hello Michael!' ? 'Hello Angular!' : 'Hello Michael!';
+  }
 }
