@@ -45,4 +45,8 @@ export class FlightSearchComponent {
       },
     });
   }
+
+  trackFlight(index: number, flight: Flight): number {
+    return flight.id;
+  }
 }
