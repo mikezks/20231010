@@ -1,11 +1,12 @@
-import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { Flight, initFlight } from '../../../model/flight';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ActivatedRoute } from '@angular/router';
+import { distinctUntilChanged, map, switchMap, tap } from 'rxjs';
+import { initFlight } from '../../../model/flight';
 import { ValidationErrorsComponent } from '../../../shared/validation/validation-errors/validation-errors.component';
 import { FlightService } from '../../data-access/flight.service';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-flight-edit',
@@ -20,25 +21,29 @@ export class FlightEditComponent {
 
   id = 0;
   showDetails = false;
-
-  /*
-    Alternative:
-    type FlightData = { flight: Flight };
-    data = inject<FlightData>(MAT_DIALOG_DATA);
-  */
-
   flight = initFlight;
 
   constructor() {
-    this.route.paramMap.subscribe(
-      params => {
-        this.id = +(params.get('id') || 0);
-        this.showDetails = params.get('showDetails') === 'true';
-
-        this.flightService.findById(this.id).subscribe(
-          flight => this.flight = flight
-        );
-      }
-    )
+    this.route.paramMap.pipe(
+      // Create local state w/ correct typing
+      map(params => ({
+        id: +(params.get('id') || 0),
+        showDetails: params.get('showDetails') === 'true'
+      })),
+      // Set class props based on state
+      tap(({id, showDetails}) => {
+        this.id = id;
+        this.showDetails = showDetails;
+      }),
+      // Map to ID
+      map(({id}) => id),
+      // Filter same IDs
+      distinctUntilChanged(),
+      // Load Flights based on ID
+      switchMap(id => this.flightService.findById(this.id))
+    ).subscribe(
+      // Set flights class prop
+      flight => this.flight = flight
+    );
   }
 }

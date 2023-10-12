@@ -1,13 +1,11 @@
 import { inject } from '@angular/core';
 import { Router, Routes } from "@angular/router";
-import { HomeComponent } from "../core/features/home/home.component";
-import { AboutComponent } from "../core/features/about/about.component";
 import { NotFoundComponent } from "../shared/features/not-found/not-found.component";
+import { DefaultFlightService } from './data-access/default-flight.service';
+import { FlightService } from './data-access/flight.service';
+import { FlightEditComponent } from "./features/flight-edit/flight-edit.component";
 import { FlightSearchComponent } from "./features/flight-search/flight-search.component";
 import { PassengerSearchComponent } from "./features/passenger-search/passenger-search.component";
-import { FlightEditComponent } from "./features/flight-edit/flight-edit.component";
-import { FlightService } from './data-access/flight.service';
-import { DummyFlightService } from './data-access/dummy-flight.service';
 
 
 const FLIGHT_BOOKING_ROUTES: Routes = [
@@ -16,7 +14,7 @@ const FLIGHT_BOOKING_ROUTES: Routes = [
     providers: [
       {
         provide: FlightService,
-        useClass: DummyFlightService
+        useClass: DefaultFlightService
       }
     ],
     children: [
