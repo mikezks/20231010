@@ -1,13 +1,14 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { Flight } from '../model/flight';
 import { FormsModule } from '@angular/forms';
+import { CityValidatorDirective } from '../shared/validation/city-validator.directive';
 
 @Component({
   selector: 'app-flight-edit',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, MatDialogModule, CityValidatorDirective],
   templateUrl: './flight-edit.component.html',
   styleUrls: ['./flight-edit.component.css']
 })
