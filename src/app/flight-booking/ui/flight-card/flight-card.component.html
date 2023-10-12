@@ -14,9 +14,12 @@
         {{ selected ? "Remove" : "Select" }}
       </button>
 
-      <button (click)="edit()" class="btn btn-default">
+      <a
+        [routerLink]="['/flight-edit', item.id, { showDetails: true }]"
+        class="btn btn-default"
+      >
         Edit
-      </button>
+      </a>
     </p>
   </div>
 </div>

@@ -4,6 +4,7 @@ import { AboutComponent } from "../core/features/about/about.component";
 import { NotFoundComponent } from "../shared/features/not-found/not-found.component";
 import { FlightSearchComponent } from "./features/flight-search/flight-search.component";
 import { PassengerSearchComponent } from "./features/passenger-search/passenger-search.component";
+import { FlightEditComponent } from "./features/flight-edit/flight-edit.component";
 
 
 export const FLIGHT_BOOKING_ROUTES: Routes = [
@@ -15,6 +16,10 @@ export const FLIGHT_BOOKING_ROUTES: Routes = [
   {
     path: 'flight-search',
     component: FlightSearchComponent
+  },
+  {
+    path: 'flight-edit/:id',
+    component: FlightEditComponent
   },
   {
     path: 'passenger-search',

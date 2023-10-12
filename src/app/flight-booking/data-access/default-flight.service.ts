@@ -21,4 +21,10 @@ export class DefaultFlightService implements FlightService {
 
     return this.http.get<Flight[]>(url, { headers, params });
   }
+
+  findById(id: number): Observable<Flight> {
+    const url = `${this.configService.config.baseUrl}/flight/${id}`;
+
+    return this.http.get<Flight>(url);
+  }
 }
