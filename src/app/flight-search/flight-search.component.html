@@ -31,7 +31,10 @@
     <app-flight-card
       [item]="flight"
       [(selected)]="basket[flight.id]"
-    />
+    >
+      <h5>This is my new subtitle!</h5>
+      <p class="flight-info">Flight-Info: This Flight is overbooked!</p>
+    </app-flight-card>
 
   </div>
 </div>

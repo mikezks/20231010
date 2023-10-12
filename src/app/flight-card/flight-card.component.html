@@ -3,6 +3,7 @@
     <h2 class="card-title">
       {{ item.from }} - {{ item.to }}
     </h2>
+    <ng-content></ng-content>
   </div>
 
   <div class="card-body">
@@ -15,6 +16,7 @@
     <p>
       Delayed: {{ item.delayed }}
     </p>
+    <ng-content select=".flight-info"></ng-content>
     <p>
       <button class="btn btn-default" (click)="toggleSelection()">
         {{ selected ? 'Remove' : 'Select' }}
