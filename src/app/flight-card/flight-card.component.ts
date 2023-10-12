@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { initialFlight } from '../model/flight';
 
 @Component({
@@ -7,7 +7,8 @@ import { initialFlight } from '../model/flight';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './flight-card.component.html',
-  styleUrls: ['./flight-card.component.css']
+  styleUrls: ['./flight-card.component.css'],
+  // encapsulation: ViewEncapsulation.None
 })
 export class FlightCardComponent implements OnInit, OnDestroy {
   @Input() item = initialFlight;
