@@ -1,4 +1,5 @@
-import { Routes } from "@angular/router";
+import { inject } from '@angular/core';
+import { Router, Routes } from "@angular/router";
 import { HomeComponent } from "../core/features/home/home.component";
 import { AboutComponent } from "../core/features/about/about.component";
 import { NotFoundComponent } from "../shared/features/not-found/not-found.component";
@@ -10,23 +11,33 @@ import { FlightEditComponent } from "./features/flight-edit/flight-edit.componen
 export const FLIGHT_BOOKING_ROUTES: Routes = [
   {
     path: '',
-    redirectTo: 'flight-search',
-    pathMatch: 'full'
-  },
-  {
-    path: 'flight-search',
-    component: FlightSearchComponent
-  },
-  {
-    path: 'flight-edit/:id',
-    component: FlightEditComponent
-  },
-  {
-    path: 'passenger-search',
-    component: PassengerSearchComponent
-  },
-  {
-    path: '**',
-    component: NotFoundComponent
+    children: [
+      {
+        path: '',
+        redirectTo: 'flight-search',
+        pathMatch: 'full'
+      },
+      {
+        path: 'flight-search',
+        component: FlightSearchComponent,
+        canMatch: [
+          () => {
+            inject(Router).createUrlTree(['/flight-booking/passenger-search']);
+          }
+        ]
+      },
+      {
+        path: 'flight-edit/:id',
+        component: FlightEditComponent
+      },
+      {
+        path: 'passenger-search',
+        component: PassengerSearchComponent
+      },
+      {
+        path: '**',
+        component: NotFoundComponent
+      }
+    ]
   }
 ];
