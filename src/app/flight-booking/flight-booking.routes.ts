@@ -6,11 +6,19 @@ import { NotFoundComponent } from "../shared/features/not-found/not-found.compon
 import { FlightSearchComponent } from "./features/flight-search/flight-search.component";
 import { PassengerSearchComponent } from "./features/passenger-search/passenger-search.component";
 import { FlightEditComponent } from "./features/flight-edit/flight-edit.component";
+import { FlightService } from './data-access/flight.service';
+import { DummyFlightService } from './data-access/dummy-flight.service';
 
 
-export const FLIGHT_BOOKING_ROUTES: Routes = [
+const FLIGHT_BOOKING_ROUTES: Routes = [
   {
     path: '',
+    providers: [
+      {
+        provide: FlightService,
+        useClass: DummyFlightService
+      }
+    ],
     children: [
       {
         path: '',
@@ -41,3 +49,5 @@ export const FLIGHT_BOOKING_ROUTES: Routes = [
     ]
   }
 ];
+
+export default FLIGHT_BOOKING_ROUTES;
