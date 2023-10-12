@@ -4,6 +4,7 @@ import { SidebarComponent } from './core/ui/sidebar/sidebar.component';
 import { FlightSearchComponent } from "./flight-booking/features/flight-search/flight-search.component";
 import { ConfigService } from './shared/config/config.service';
 import { NextFlightsModule } from './next-flights/next-flights.module';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   standalone: true,
@@ -12,7 +13,8 @@ import { NextFlightsModule } from './next-flights/next-flights.module';
     SidebarComponent,
     NavbarComponent,
     FlightSearchComponent,
-    NextFlightsModule
+    NextFlightsModule,
+    RouterOutlet
   ],
   template: `
     <div class="wrapper">
@@ -25,9 +27,7 @@ import { NextFlightsModule } from './next-flights/next-flights.module';
 
         <div class="content">
 
-          <app-flight-search />
-
-          <app-next-flights />
+          <router-outlet />
 
         </div>
 
